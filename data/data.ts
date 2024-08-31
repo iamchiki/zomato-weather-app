@@ -1,12 +1,4 @@
-export interface Locality {
-  id: number;
-  cityName: string;
-  localityName: string;
-  localityId: string;
-  latitude: number;
-  longitude: number;
-  device_type: string;
-}
+import { Locality } from "@/utils/types";
 
 export const localities: Locality[] = [
   {

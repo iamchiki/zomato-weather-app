@@ -1,6 +1,7 @@
 "use client";
 
-import { localities, Locality } from "@/data/data";
+import { localities } from "@/data/data";
+import { Locality } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
@@ -9,9 +10,17 @@ const SearchBox: React.FC = () => {
   const router = useRouter();
 
   const handleOnSelect = (item: Locality) => {
-    // the item selected
+    const data = {
+      localityId: item.localityId,
+      cityName: item.cityName,
+      localityName: item.localityName,
+    };
 
-    router.push("/weather-info");
+    const queryString = new URLSearchParams(
+      data as Record<string, string>
+    ).toString();
+
+    router.push(`/weather-info?${queryString}`);
   };
 
   const formatResult = (item: Locality) => {
@@ -34,6 +43,7 @@ const SearchBox: React.FC = () => {
         onSelect={handleOnSelect}
         autoFocus
         formatResult={formatResult}
+        placeholder="Search Weather by Locality name"
       />
     </>
   );
